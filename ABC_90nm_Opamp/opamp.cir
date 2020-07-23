@@ -1,0 +1,122 @@
+Two stage CMOS Op-Amp
+
+
+.include ./90nm/90nm_bulk
+
+
+
+.include ./variable
+ 
+.subckt opamp niin nvdd nvss inp inm out w1=1u w2=1u w3=1u w4=1u w5=1u w6=1u w7=1u w8=1u w9=1u  l1=1u l2=1u l3=1u l4=1u l5=1u  cc=10p
+
+	M9	niin	niin	nvss	nvss	cmosn	w=w9	l=l3	
+	M8	n2	niin	nvss	nvss 	cmosn 	w=w6	l=l3    
+	M7 	n2	n2	n3	nvdd	cmosp	w=w8	l=l5    
+	M6	n3	n3	nvdd	nvdd	cmosp	w=w7	l=l5	
+	M1 	n5	inm	n4	nvss	cmosn	w=w1	l=l1	
+	M2	n6	inp	n4	nvss	cmosn	w=w1	l=l1	
+	M3	n5	n5	nvdd	nvdd	cmosp	w=w2	l=l2	
+	M4	n6	n5	nvdd	nvdd	cmosp	w=w2	l=l2	
+	M5	n4	niin	nvss	nvss	cmosn	w=w9	l=l3	
+	M11	n6	n2	n7	nvdd	cmosp	w=w5	l=l4	
+	M10	out	niin	nvss	nvss	cmosn	w=w4	l=l3	
+	M12	out 	n6	nvdd	nvdd	cmosp	w=w3	l=l2	
+	CC1	n7	out	cc
+
+.ends opamp
+
+X1 niin1 nvdd1 nvss1 inp1 inm1 out1 opamp w1='w1' w2='w2' w3='w3' w4='w4' w5='w5' w6='w6' w7='w7' w8='w8' w9='w9' 
++l1='l1' l2='l2' l3='l3' l4='l4' l5='l5'  cc='cc'
+I01	nvdd1	niin1	DC	'i0'
+
+VDD1	nvdd1	0	DC	0.5
+VSS1	nvss1	0	DC	-0.5
+CL1	out1	0	0.05pF
+RF	inm1	out1	10E9
+CF	inm1	0	1
+
+Vip1	inp1	0	DC	0	ac	1
+
+X2 niin2 nvdd2 nvss2 inp2 inm2 out2 opamp w1='w1' w2='w2' w3='w3' w4='w4' w5='w5' w6='w6' w7='w7' w8='w8' w9='w9' 
++l1='l1' l2='l2' l3='l3' l4='l4' l5='l5'  cc='cc'
+I02	nvdd2	niin2	DC	'i0'
+
+VDD2	nvdd2	0	DC	0.5
+VSS2	nvss2	0	DC	-0.5
+CL2	out2	0	0.05pF
+VD2	inm2	out2	DC	0
+
+vinp2	inp2	0	dc	0	ac	1
+
+X3 niin3 nvdd3 nvss3 inp3 inm3 out3 opamp w1='w1' w2='w2' w3='w3' w4='w4' w5='w5' w6='w6' w7='w7' w8='w8' w9='w9' 
++l1='l1' l2='l2' l3='l3' l4='l4' l5='l5'  cc='cc'
+I03	nvdd3	niin3	DC	'i0'
+
+VDD3	nvdd3	0	DC	0.5	ac	1
+VSS3	nvss3	0	DC	-0.5
+CL3	out3	0	0.05pF
+VD3	inm3	out3	DC	0
+
+vinp3	inp3	0	dc	0
+	
+X4 niin4 nvdd4 nvss4 inp4 inm4 out4 opamp w1='w1' w2='w2' w3='w3' w4='w4' w5='w5' w6='w6' w7='w7' w8='w8' w9='w9' 
++l1='l1' l2='l2' l3='l3' l4='l4' l5='l5'  cc='cc'
+I04	nvdd4	niin4	DC	'i0'
+
+VDD4	nvdd4	0	DC	0.5 	
+VSS4	nvss4	0	DC	-0.5
+CL4	out4	0	0.05pF
+
+vinp4	inp4	0	dc	0	ac	1
+vinm4	inm4	out4	dc	0	ac	1
+
+X5 niin5 nvdd5 nvss5 inp5 inm5 out5 opamp w1='w1' w2='w2' w3='w3' w4='w4' w5='w5' w6='w6' w7='w7' w8='w8' w9='w9' 
++l1='l1' l2='l2' l3='l3' l4='l4' l5='l5'  cc='cc'
+I05	nvdd5	niin5	DC	'i0'
+
+VDD5	nvdd5	0	DC	0.5 	ac	1
+VSS5	nvss5	0	DC	-0.5
+CL5	out5	0	0.05pF
+VD5	inm5	out5	DC	0
+
+vinp5	inp5	0	dc	0	pulse(-0.2  0.2 1E-9  1E-9  1E-9  0.1E-6  1E-6)
+
+.control
+
+ac	dec	100	1	1E9
+
+meas	ac	PMr 	find	vph(out1) when	vdb(out1)=0	FALL=LAST
+meas 	ac	Av	find	vdb(out1) at=1
+meas	ac	uav	find	vdb(out2)	at=1
+let	low3=uav-3
+
+meas	ac	ugb	when	vdb(out2)=low3
+let	pm = 180+PMr*180/PI
+
+meas	ac	rpsrr	find 	vdb(out3) at=1
+let	pssr =-1*rpsrr
+
+meas	ac	rcmrr	find 	vdb(out4) at=1
+let	cmrr =-1*rcmrr
+
+print	av, pm, ugb, pssr, cmrr
+wrdata acsim.data av, pm, ugb, pssr, cmrr
+
+
+tran 	1E-9	0.2E-6
+
+meas 	tran	rt	trig	v(out5)	VAL=-0.1  RISE=1  TARG	v(out5)	VAL=0.1	RISE=1
+let	rsr=0.2/rt/1E6
+meas 	tran	ft	trig	v(out5)	VAL=0.1	  FALL=1  TARG	v(out5)	VAL=-0.1 FALL=1
+let	fsr=0.2/ft/1E6
+
+print	rsr, fsr
+wrdata	transim.data	rsr, fsr
+op
+let pc=-i(VDD2)*v(nvdd2)*2
+wrdata opsim.data pc
+
+
+.endc
+.end
+

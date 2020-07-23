@@ -1,0 +1,61 @@
+
+Circuit: two stage cmos op-amp
+
+Warning: Model issue on line 5 :
+  .model cmosn nmos level=49 lint=1.5e-08 tox=2.5e-09 vth0=0.2607 rdsw=180 ...
+unrecognized parameter (tref) - ignored
+unrecognized parameter (xl) - ignored
+unrecognized parameter (xw) - ignored
+unrecognized parameter (binflag) - ignored
+unrecognized parameter (acm) - ignored
+unrecognized parameter (ldif) - ignored
+unrecognized parameter (rd) - ignored
+unrecognized parameter (rs) - ignored
+unrecognized parameter (rsc) - ignored
+unrecognized parameter (rdc) - ignored
+unrecognized parameter (php) - ignored
+unrecognized parameter (cjgate) - ignored
+unrecognized parameter (cta) - ignored
+unrecognized parameter (ctp) - ignored
+unrecognized parameter (pta) - ignored
+unrecognized parameter (ptp) - ignored
+unrecognized parameter (n) - ignored
+Warning: Model issue on line 10 :
+  .model cmosp pmos level=49 lint=1.5e-08 tox=2.5e-09 vth0=-0.303 rdsw=300 ...
+unrecognized parameter (tref) - ignored
+unrecognized parameter (xl) - ignored
+unrecognized parameter (xw) - ignored
+unrecognized parameter (binflag) - ignored
+unrecognized parameter (acm) - ignored
+unrecognized parameter (ldif) - ignored
+unrecognized parameter (rd) - ignored
+unrecognized parameter (rs) - ignored
+unrecognized parameter (rsc) - ignored
+unrecognized parameter (rdc) - ignored
+unrecognized parameter (php) - ignored
+unrecognized parameter (cjgate) - ignored
+unrecognized parameter (cta) - ignored
+unrecognized parameter (ctp) - ignored
+unrecognized parameter (pta) - ignored
+unrecognized parameter (ptp) - ignored
+unrecognized parameter (n) - ignored
+Doing analysis at TEMP = 27.000000 and TNOM = 27.000000
+
+Note: Starting dynamic gmin stepping
+Trying gmin =   1.0000E-03 Note: One successful gmin step
+Trying gmin =   1.0000E-04 Note: One successful gmin step
+Trying gmin =   1.0000E-05 Note: One successful gmin step
+Trying gmin =   1.0000E-06 Warning: Further gmin increment
+Trying gmin =   5.6234E-06 Note: One successful gmin step
+Trying gmin =   2.3714E-06 Note: One successful gmin step
+Trying gmin =   6.4938E-07 Note: One successful gmin step
+Trying gmin =   9.3057E-08 Note: One successful gmin step
+Trying gmin =   9.3057E-09 Note: One successful gmin step
+Trying gmin =   9.3057E-10 Warning: Further gmin increment
+Trying gmin =   5.2330E-09 Note: One successful gmin step
+Trying gmin =   2.2067E-09 Note: One successful gmin step
+Trying gmin =   6.0430E-10 Note: One successful gmin step
+Trying gmin =   8.6596E-11 Note: One successful gmin step
+Trying gmin =   8.6596E-12 Note: One successful gmin step
+Trying gmin =   1.0000E-12 Note: One successful gmin step
+Note: Dynamic gmin stepping completed

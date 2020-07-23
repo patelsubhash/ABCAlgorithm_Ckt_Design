@@ -1,0 +1,17 @@
+
+.param w1=3.7e-06
+.param w2=1.1e-06
+.param w3=3.1e-06
+.param w4=7.8e-06
+.param w5=4.8e-06
+.param w6=3.2e-06
+.param w7=6.3e-06
+.param w8=6.9e-06
+.param w9=3.6e-06
+.param l1=5e-07
+.param l2=5e-07
+.param l3=4e-07
+.param l4=1e-07
+.param l5=4e-07
+.param i0=3.8e-06
+.param cc=7.2e-14

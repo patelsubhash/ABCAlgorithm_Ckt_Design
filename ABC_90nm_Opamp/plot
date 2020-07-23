@@ -1,0 +1,30 @@
+
+#set terminal postscript eps enhanced color 
+
+set terminal pdfcairo color dashed  
+
+#set key outside
+set key right top
+
+set grid
+
+set ylabel 'Error '
+set xlabel 'Function Evaluations ( x 100000)'
+
+set logscale y 10
+
+#set yrange [1:200]
+#set xrange [0:27]
+
+set xtics("0" 0, "0.5" 50000, "1" 100000, "1.5" 150000, "2" 200000)
+
+set output 'sphere.pdf'
+
+plot 'run' using 1:2 w l lw 4 title 'Sphere'
+
+        
+unset logscale y
+
+
+
+
